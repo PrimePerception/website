@@ -1,0 +1,42 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ProjectEntry from '~/components/ProjectEntry.astro';
+import { projects } from '~/data/projects';
+import { researchAreas } from '~/data/research';
+
+const metadata = {
+  title: 'Research Highlights',
+  description:
+    'Research interests and projects by Abteen Arab, focused on vision and its interplay with other modalities.',
+};
+
+const projectGroups = researchAreas.map((area) => ({
+  ...area,
+  id: area.title.toLowerCase().replaceAll(' ', '-'),
+  projects: projects.filter((project) => project.area === area.title),
+}));
+---
+
+<Layout metadata={metadata}>
+  <div class="lab-shell">
+    <h1 class="sr-only">Research Highlights</h1>
+
+    {
+      projectGroups.map((area, index) => (
+        <section class:list={['lab-section', { 'lab-rule': index > 0 }]} aria-labelledby={`area-${area.id}`}>
+          <h2 id={`area-${area.id}`} class="lab-section-heading mb-5 scroll-mt-28">
+            {area.title}
+          </h2>
+          <p class="lab-text">{area.description}</p>
+          {area.projects.length > 0 && (
+            <div class="mt-10 space-y-12">
+              {area.projects.map((project) => (
+                <ProjectEntry project={project} />
+              ))}
+            </div>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</Layout>

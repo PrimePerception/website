@@ -1,24 +1,27 @@
 ---
-import Layout from '~/layouts/Layout.astro';
-import { getHomePermalink } from '~/utils/permalinks';
+import Layout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
 
-const title = `Error 404`;
+const metadata = {
+  title: 'Page not found',
+  robots: { index: false, follow: true },
+};
 ---
 
-<Layout metadata={{ title }}>
-  <section class="flex items-center h-full p-16">
-    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-      <div class="max-w-md text-center">
-        <h2 class="mb-8 font-bold text-9xl">
-          <span class="sr-only">Error</span>
-          <span class="text-primary">404</span>
-        </h2>
-        <p class="text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
-        <p class="mt-4 mb-8 text-lg text-muted dark:text-slate-400">
-          But don't worry, you can find plenty of other things on our homepage.
-        </p>
-        <a rel="noopener noreferrer" href={getHomePermalink()} class="btn ml-4">Back to homepage</a>
+<Layout metadata={metadata}>
+  <div class="lab-shell">
+    <section class="lab-page-intro min-h-[60vh]" aria-labelledby="not-found-title">
+      <p class="lab-eyebrow mb-6">404 / Wrong turn</p>
+      <h1 id="not-found-title" class="lab-title">An unexplored path.</h1>
+      <p class="lab-lede mt-6">
+        That page could not be found. The research highlights are a good place to pick things up.
+      </p>
+      <div class="lab-actions">
+        <a class="lab-button" href={getPermalink('/research-highlights')}
+          >Explore research highlights <span aria-hidden="true">→</span></a
+        >
+        <a class="lab-text-link" href={getPermalink('/')}>Return home</a>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </Layout>

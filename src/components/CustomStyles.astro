@@ -1,7 +1,6 @@
 ---
-// Font family is provided by Astro's native Fonts API (see `fonts` in
-// astro.config.ts and <Font /> in Layout.astro), exposed as `--font-inter`.
-// To switch typefaces, change the `fonts` entry and repoint `--aw-font-*` below.
+// Shared neutral and purple tokens for the personal lab, in both color modes.
+// Inter is self-hosted through Astro's native Fonts API in astro.config.ts.
 ---
 
 <style is:inline>
@@ -10,39 +9,44 @@
     --aw-font-serif: var(--font-inter);
     --aw-font-heading: var(--font-inter);
 
-    --aw-color-primary: rgb(1 97 239);
-    --aw-color-secondary: rgb(1 84 207);
-    --aw-color-accent: rgb(109 40 217);
-
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
+    --aw-color-primary: rgb(121 76 158);
+    --aw-color-secondary: rgb(101 57 138);
+    --aw-color-accent: rgb(121 76 158);
+    --aw-color-text-heading: rgb(24 24 24);
+    --aw-color-text-default: rgb(64 64 64);
+    --aw-color-text-muted: rgb(102 102 102);
     --aw-color-bg-page: rgb(255 255 255);
+    --aw-color-bg-page-dark: rgb(14 14 17);
 
-    --aw-color-bg-page-dark: rgb(8 9 10);
+    --lab-line: rgb(0 0 0 / 12%);
+    --lab-surface: rgb(250 250 250);
+    --lab-accent-soft: rgb(248 248 248);
+    --lab-button-border: rgb(0 0 0 / 16%);
+    --lab-button-hover: rgb(242 242 242);
 
-    ::selection {
-      background-color: lavender;
-    }
+    color-scheme: light;
   }
 
   .dark {
-    --aw-font-sans: var(--font-inter);
-    --aw-font-serif: var(--font-inter);
-    --aw-font-heading: var(--font-inter);
+    --aw-color-primary: rgb(188 145 223);
+    --aw-color-secondary: rgb(169 122 207);
+    --aw-color-accent: rgb(188 145 223);
+    --aw-color-text-heading: rgb(240 239 245);
+    --aw-color-text-default: rgb(202 199 211);
+    --aw-color-text-muted: rgb(153 148 164);
+    --aw-color-bg-page: rgb(14 14 17);
 
-    --aw-color-primary: rgb(1 97 239);
-    --aw-color-secondary: rgb(1 84 207);
-    --aw-color-accent: rgb(109 40 217);
+    --lab-line: rgb(240 239 245 / 10%);
+    --lab-surface: rgb(21 20 26);
+    --lab-accent-soft: rgb(188 145 223 / 8%);
+    --lab-button-border: color-mix(in srgb, var(--aw-color-primary) 28%, transparent);
+    --lab-button-hover: color-mix(in srgb, var(--aw-color-primary) 18%, transparent);
 
-    --aw-color-text-heading: rgb(247, 248, 248);
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: rgb(8 9 10);
+    color-scheme: dark;
+  }
 
-    ::selection {
-      background-color: black;
-      color: snow;
-    }
+  ::selection {
+    background-color: var(--aw-color-primary);
+    color: var(--aw-color-bg-page);
   }
 </style>

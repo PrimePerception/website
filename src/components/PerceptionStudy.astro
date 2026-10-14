@@ -1,0 +1,346 @@
+---
+interface Props {
+  kind: 'visual' | 'world' | 'action' | 'pathology';
+  title: string;
+  number: string;
+  href: string;
+}
+
+const { kind, title, number, href } = Astro.props;
+
+const points =
+  kind === 'visual'
+    ? Array.from({ length: 288 }, (_, index) => {
+        const around = Math.floor(index / 8);
+        const section = index % 8;
+        const u = (around / 36) * Math.PI * 2;
+        const v = (section / 8) * Math.PI * 2;
+        const tube = 0.36 + Math.sin(u * 3) * 0.035;
+        const radius = 0.96 + tube * Math.cos(v);
+        const x = radius * Math.cos(u);
+        const y = radius * Math.sin(u);
+        const z = tube * Math.sin(v) + Math.sin(u * 2) * 0.07;
+        const tiltedY = y * Math.cos(0.98) - z * Math.sin(0.98);
+        const depth = y * Math.sin(0.98) + z * Math.cos(0.98);
+        const projectedX = x * Math.cos(-0.36) - tiltedY * Math.sin(-0.36);
+        const projectedY = x * Math.sin(-0.36) + tiltedY * Math.cos(-0.36);
+        const proximity = (depth + 1.25) / 2.5;
+
+        return {
+          x: (140 + projectedX * 73).toFixed(2),
+          y: (94 + projectedY * 73).toFixed(2),
+          radius: (0.9 + proximity * 0.85).toFixed(2),
+          opacity: (0.3 + proximity * 0.65).toFixed(2),
+          depth,
+        };
+      }).sort((a, b) => a.depth - b.depth)
+    : [];
+
+const cells =
+  kind === 'pathology'
+    ? Array.from({ length: 84 }, (_, index) => {
+        const column = index % 12;
+        const row = Math.floor(index / 12);
+        const x = 38 + column * 14 + Math.sin(index * 2.7) * 5;
+        const y = 42 + row * 17 + Math.cos(index * 1.9) * 5;
+
+        return {
+          x,
+          y,
+          rx: 3.5 + (Math.sin(index * 1.8) + 1) * 1.4,
+          ry: 2.8 + (Math.cos(index * 2.2) + 1) * 0.8,
+          rotation: (index * 47) % 180,
+          visible: ((x - 116) / 95) ** 2 + ((y - 95) / 70) ** 2 < 1,
+        };
+      }).filter((cell) => cell.visible)
+    : [];
+---
+
+<a class="perception-study" href={href}>
+  <div class="study-label" aria-hidden="true">
+    <span class="status-dot"></span>
+    <span>STUDY / {number}</span>
+  </div>
+
+  <svg viewBox="0 0 280 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path class="frame" d="M20 37V21H36M244 21H260V37M20 153V169H36M244 169H260V153"></path>
+
+    {
+      kind === 'visual' && (
+        <>
+          <g class="guides">
+            <path d="M38 139L140 183L242 139M140 183V164" />
+            <path d="M63 150L165 106M89 161L191 117M115 172L217 128" />
+            <path d="M63 128L165 172M89 117L191 161M115 106L217 150" />
+          </g>
+          <g class="rays">
+            <path d="M34 126L103 72M34 126L128 137M246 75L168 54M246 75L189 118" />
+          </g>
+          <g>
+            {points.map((point) => (
+              <circle class="point" cx={point.x} cy={point.y} r={point.radius} opacity={point.opacity} />
+            ))}
+          </g>
+          <g class="linework">
+            <path d="M24 119L34 115L44 121V132L34 137L24 131ZM34 115V126L44 132M34 126L24 131" />
+            <path d="M236 68L246 64L256 70V81L246 86L236 80ZM246 64V75L256 81M246 75L236 80" />
+          </g>
+        </>
+      )
+    }
+
+    {
+      kind === 'world' && (
+        <>
+          <g class="guides">
+            <path d="M26 129L140 72L254 129L140 186Z" />
+            <path d="M49 140L163 83M72 152L186 95M94 163L208 106M117 175L231 118" />
+            <path d="M49 118L163 175M72 106L186 163M94 95L208 152M117 83L231 140" />
+            <path d="M140 72V28" stroke-dasharray="2 5" />
+          </g>
+          <g class="surface linework" stroke-linejoin="round">
+            <path d="M58 99L87 84L116 99V142L87 157L58 142ZM58 99L87 114L116 99M87 114V157" />
+            <path d="M138 57L170 41L202 57V111L170 127L138 111ZM138 57L170 73L202 57M170 73V127" />
+            <path d="M168 132L190 121L212 132V152L190 163L168 152ZM168 132L190 143L212 132M190 143V163" />
+          </g>
+          <path class="trajectory" d="M40 151L103 179L146 155L151 135L227 98" />
+          <g class="point">
+            <circle cx="40" cy="151" r="3" />
+            <circle cx="103" cy="179" r="3" />
+            <circle cx="146" cy="155" r="3" />
+            <circle cx="227" cy="98" r="3" />
+          </g>
+        </>
+      )
+    }
+
+    {
+      kind === 'action' && (
+        <>
+          <g class="guides">
+            <path d="M30 151L140 96L250 151L140 184ZM67 133L177 169M104 114L214 151M67 169L177 114M104 184L214 129" />
+            <path d="M198 73V141M163 91H231" stroke-dasharray="2 5" />
+          </g>
+          <g class="surface linework" stroke-linejoin="round">
+            <path d="M195 126L216 115L237 126V150L216 161L195 150ZM195 126L216 137L237 126M216 137V161" />
+            <path d="M56 153V143Q77 131 98 143V153Q77 166 56 153ZM56 143Q77 156 98 143" />
+          </g>
+          <path class="arm-outline" d="M77 139L108 75L159 105L192 72" />
+          <path class="arm" d="M77 139L108 75L159 105L192 72" />
+          <g class="joint">
+            <circle cx="77" cy="139" r="6" />
+            <circle cx="108" cy="75" r="7" />
+            <circle cx="159" cy="105" r="6" />
+          </g>
+          <g class="linework" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M188 66L199 77M193 69L200 62L208 69M196 74L205 68L212 75" />
+          </g>
+          <path class="trajectory" d="M145 147C170 156 195 134 216 94M207 98L216 94L217 104" />
+          <circle class="point" cx="145" cy="147" r="2.5" />
+        </>
+      )
+    }
+
+    {
+      kind === 'pathology' && (
+        <>
+          <path
+            class="tissue"
+            d="M25 86C22 57 57 29 89 31C116 16 150 37 178 40C211 46 224 79 209 101C218 130 184 158 153 154C122 174 93 151 68 153C36 148 21 116 25 86Z"
+          />
+          <g>
+            {cells.map((cell) => (
+              <g transform={`rotate(${cell.rotation} ${cell.x} ${cell.y})`}>
+                <ellipse class="cell" cx={cell.x} cy={cell.y} rx={cell.rx} ry={cell.ry} />
+                <ellipse class="nucleus" cx={cell.x + 0.5} cy={cell.y} rx="1.4" ry="1" />
+              </g>
+            ))}
+          </g>
+          <g class="patch-grid">
+            <path d="M50 50H176V134H50ZM92 50V134M134 50V134M50 92H176" />
+          </g>
+          <rect class="selected-patch" x="134" y="92" width="42" height="42" />
+          <path class="rays" d="M176 92L220 42M176 134L260 82" />
+          <rect class="surface linework" x="218" y="40" width="44" height="44" rx="3" />
+          <g class="cell">
+            <ellipse cx="232" cy="52" rx="6" ry="4" transform="rotate(-28 232 52)" />
+            <ellipse cx="247" cy="63" rx="7" ry="4" transform="rotate(35 247 63)" />
+            <ellipse cx="231" cy="74" rx="5" ry="3.5" transform="rotate(15 231 74)" />
+          </g>
+          <g class="nucleus">
+            <circle cx="232" cy="52" r="1.8" />
+            <circle cx="247" cy="63" r="1.8" />
+            <circle cx="231" cy="74" r="1.6" />
+          </g>
+        </>
+      )
+    }
+  </svg>
+
+  <div class="study-caption">
+    <span>{title}</span>
+    <span class="caption-mark" aria-hidden="true">↗</span>
+  </div>
+</a>
+
+<style>
+  .perception-study {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--lab-line);
+    border-radius: 12px;
+    background: var(--lab-surface);
+    transition: border-color 160ms ease;
+  }
+
+  .perception-study:hover {
+    border-color: var(--aw-color-primary);
+  }
+
+  .study-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 15px 15px 3px;
+    color: var(--aw-color-text-muted);
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .status-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--aw-color-primary);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .frame {
+    stroke: var(--lab-line);
+    stroke-width: 0.8;
+  }
+
+  .guides {
+    stroke: var(--aw-color-text-muted);
+    stroke-width: 0.8;
+    opacity: 0.23;
+  }
+
+  .point,
+  .nucleus {
+    fill: var(--aw-color-primary);
+  }
+
+  .linework {
+    stroke: var(--aw-color-primary);
+    stroke-width: 1.2;
+  }
+
+  .surface,
+  .joint {
+    fill: var(--lab-surface);
+  }
+
+  .rays {
+    stroke: var(--aw-color-primary);
+    stroke-width: 0.8;
+    stroke-dasharray: 3 4;
+    opacity: 0.4;
+  }
+
+  .trajectory {
+    stroke: var(--aw-color-primary);
+    stroke-width: 1.4;
+    stroke-dasharray: 4 4;
+    stroke-linecap: round;
+  }
+
+  .arm-outline,
+  .arm {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .arm-outline {
+    stroke: var(--aw-color-primary);
+    stroke-width: 13;
+  }
+
+  .arm {
+    stroke: var(--lab-surface);
+    stroke-width: 9;
+  }
+
+  .joint {
+    stroke: var(--aw-color-primary);
+    stroke-width: 1.5;
+  }
+
+  .tissue {
+    stroke: var(--aw-color-text-muted);
+    stroke-width: 0.8;
+    stroke-dasharray: 2 4;
+    opacity: 0.4;
+  }
+
+  .cell {
+    fill: color-mix(in srgb, var(--aw-color-primary) 12%, transparent);
+    stroke: var(--aw-color-primary);
+    stroke-width: 0.7;
+    stroke-opacity: 0.5;
+  }
+
+  .patch-grid {
+    stroke: var(--aw-color-text-muted);
+    stroke-width: 0.8;
+    opacity: 0.35;
+  }
+
+  .selected-patch {
+    stroke: var(--aw-color-primary);
+    stroke-width: 1.5;
+  }
+
+  .study-caption {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 62px;
+    margin-inline: 15px;
+    padding-block: 12px 15px;
+    border-top: 1px solid var(--lab-line);
+    color: var(--aw-color-text-heading);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  .caption-mark {
+    flex-shrink: 0;
+    color: var(--aw-color-primary);
+    font-size: 15px;
+  }
+
+  .study-caption > span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .perception-study {
+      transition: none;
+    }
+  }
+</style>

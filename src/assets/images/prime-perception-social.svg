@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0e0e11" />
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="64" y="100" fill="#bc91df" font-size="25" font-weight="600" letter-spacing="-0.7">Prime</text>
+    <text x="137" y="100" fill="#f0eff5" font-size="25" font-weight="600" letter-spacing="-0.7">Perception</text>
+
+    <path d="M64 132H1136" stroke="#29272f" />
+
+    <text x="64" y="291" fill="#f0eff5" font-size="61" font-weight="400" letter-spacing="-2.3">
+      A personal research lab.
+    </text>
+    <text x="67" y="342" fill="#a6a3ae" font-size="22" font-weight="400" letter-spacing="0.1">
+      Visual Geometry Models · World Geometry Models · Geometry Action Models
+    </text>
+    <text x="67" y="378" fill="#a6a3ae" font-size="22" font-weight="400" letter-spacing="0.1">
+      Computational Medicine
+    </text>
+
+    <path d="M64 500H1136" stroke="#29272f" />
+    <text x="64" y="553" fill="#c0bdc7" font-size="18" letter-spacing="0.2">Abteen Arab</text>
+  </g>
+
+  <g stroke="#3c3745" stroke-width="1">
+    <path d="M943 246 1032 213 1121 247 1032 281 943 246Z" />
+    <path d="M943 246V340L1032 375 1121 340V247M1032 281V375" />
+    <path d="M943 340 1032 307 1121 340M1032 213V307" stroke-dasharray="3 6" opacity="0.55" />
+    <path d="M913 312H1151M1032 190V396" opacity="0.35" />
+  </g>
+  <circle cx="1032" cy="281" r="4" fill="#bc91df" />
+  <circle cx="943" cy="246" r="2" fill="#a6a3ae" />
+  <circle cx="1121" cy="340" r="2" fill="#a6a3ae" />
+
+  <g transform="translate(1096 63)">
+    <path
+      fill="#bc91df"
+      fill-rule="evenodd"
+      d="M0 0h11c7 0 11 3.8 11 9.7s-4 9.7-11 9.7H6v9.3H0V0Zm6 5.5v8.4h5c3.4 0 5.1-1.3 5.1-4.2S14.4 5.5 11 5.5H6Z"
+      clip-rule="evenodd"
+    />
+    <path d="m27-2-3.4 6.8" stroke="#f0eff5" stroke-width="2.9" stroke-linecap="round" />
+  </g>
+</svg>

@@ -1,0 +1,76 @@
+---
+import Image from '~/components/common/Image.astro';
+import type { LabProject } from '~/data/projects';
+
+export interface Props {
+  project: LabProject;
+  compact?: boolean;
+}
+
+const { project, compact = false } = Astro.props;
+---
+
+<article class="grid items-center gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12" aria-labelledby={`${project.id}-title`}>
+  <a
+    class="lab-project-visual transition-opacity hover:opacity-90"
+    href={project.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`Visit the ${project.title} project website (opens in a new tab)`}
+  >
+    <Image
+      src={project.image}
+      alt={project.imageAlt}
+      widths={[480, 720, 1080, 1440]}
+      sizes="(min-width: 768px) 570px, calc(100vw - 76px)"
+      layout="full-width"
+      format="webp"
+      class="h-auto w-full rounded-sm"
+    />
+  </a>
+  <div>
+    <p class="lab-eyebrow">{compact ? `${project.area} / ${project.year}` : `Research / ${project.year}`}</p>
+    <h3 id={`${project.id}-title`} class="mt-4 text-3xl font-medium tracking-tight text-heading">{project.title}</h3>
+    {
+      !compact && (
+        <>
+          <p class="mt-4 text-lg leading-relaxed text-muted">{project.subtitle}</p>
+          <p class="mt-5 font-mono text-xs text-muted">
+            {project.authors} · {project.year}
+          </p>
+        </>
+      )
+    }
+    <p class="lab-text mt-4">{project.description}</p>
+    <ul class="lab-project-tags" aria-label="Research topics">
+      {project.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <div class="mt-7 flex flex-wrap gap-x-7 gap-y-4">
+      <a class="lab-text-link" href={project.href} target="_blank" rel="noopener noreferrer">
+        Project website <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+      </a>
+      {
+        project.paperHref && (
+          <a class="lab-text-link" href={project.paperHref} target="_blank" rel="noopener noreferrer">
+            Read the paper{' '}
+            <>
+              <span aria-hidden="true">↗</span>
+              <span class="sr-only"> (opens in a new tab)</span>
+            </>
+          </a>
+        )
+      }
+      {
+        project.codeHref && (
+          <a class="lab-text-link" href={project.codeHref} target="_blank" rel="noopener noreferrer">
+            Code{' '}
+            <>
+              <span aria-hidden="true">↗</span>
+              <span class="sr-only"> (opens in a new tab)</span>
+            </>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
