@@ -1,6 +1,6 @@
 site:
   name: Prime Perception
-  site: 'https://astrowind.vercel.app'
+  site: 'https://primeperception.ca'
   base: '/'
   trailingSlash: false
 
