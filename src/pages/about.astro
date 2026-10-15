@@ -1,12 +1,11 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import { researchIntroduction } from '~/data/research';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'About',
   description:
-    'Abteen Arab’s research interests in vision and its interplay with other modalities, including geometry, action, and computational medicine.',
+    'Abteen Arab’s personal research lab exploring computer vision, geometric understanding, world geometry modeling, and efficient and adaptive vision architectures.',
 };
 ---
 
@@ -14,7 +13,31 @@ const metadata = {
   <div class="lab-shell">
     <section class="lab-page-intro" aria-labelledby="about-title">
       <h1 id="about-title" class="lab-title max-w-4xl">About</h1>
-      <p class="lab-lede mt-7">I'm Abteen Arab. {researchIntroduction}</p>
+      <div class="mt-7 max-w-2xl space-y-6">
+        <p class="lab-lede">I'm Abteen Arab, and welcome to my personal lab.</p>
+        <p class="lab-lede">
+          My research interests lie broadly in computer vision, particularly in how visual representations interact with
+          geometry, language, action, and other modalities. This space serves as a personal research wiki where I
+          document ongoing projects, ideas, experiments, and directions that I find interesting.
+        </p>
+        <p class="lab-lede">
+          I call it a personal lab because that is how I approach my independent research: as a collection of projects
+          organized around a broader research theme rather than as isolated experiments. At the center of that theme is{
+            ' '
+          }
+          <strong>geometric understanding</strong>—how models can build useful representations of the structure,
+          dynamics, and eventually the physical behavior of the visual world.
+        </p>
+        <p class="lab-lede">
+          My previous work has spanned 2D computer vision, 3D reconstruction, and visual geometry models. More recently,
+          I have been exploring world geometry modeling, efficient and adaptive vision architectures, and ways of
+          combining geometric representations with other forms of reasoning.
+        </p>
+        <p class="lab-lede">
+          This site is where I share that work, along with unfinished ideas, technical notes, experiments, and research
+          questions that I am actively thinking about.
+        </p>
+      </div>
     </section>
 
     <section class="lab-rule lab-section" aria-label="Explore the work">

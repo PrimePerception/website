@@ -1,0 +1,160 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<p class="lab-lede typing-intro" data-typing-intro>
+  <span data-typing-copy>{text}</span>
+  <span class="typing-intro__visual" aria-hidden="true" hidden>
+    <span data-typing-output></span><span class="typing-intro__cursor"></span>
+  </span>
+</p>
+
+<script>
+  type Keystroke = { kind: 'type'; character: string } | { kind: 'delete' } | { kind: 'pause'; duration: number };
+
+  function createKeystrokes(text: string): Keystroke[] {
+    const steps: Keystroke[] = [];
+    const type = (value: string) => {
+      for (const character of value) steps.push({ kind: 'type', character });
+    };
+    let position = 0;
+
+    for (const { word, typo } of [
+      { word: 'welcome', typo: 'welocme' },
+      { word: 'experiments', typo: 'experimetns' },
+    ]) {
+      const index = text.indexOf(word, position);
+      if (index === -1) continue;
+
+      type(text.slice(position, index));
+      type(typo);
+      steps.push({ kind: 'pause', duration: 420 });
+
+      let shared = 0;
+      while (word[shared] && word[shared] === typo[shared]) shared += 1;
+      for (let index = shared; index < typo.length; index += 1) steps.push({ kind: 'delete' });
+
+      steps.push({ kind: 'pause', duration: 140 });
+      type(word.slice(shared));
+      position = index + word.length;
+    }
+
+    type(text.slice(position));
+    return steps;
+  }
+
+  function initializeTypingIntros() {
+    document.querySelectorAll<HTMLElement>('[data-typing-intro]').forEach((intro) => {
+      if (intro.dataset.typingInitialized) return;
+      intro.dataset.typingInitialized = 'true';
+
+      const copy = intro.querySelector<HTMLElement>('[data-typing-copy]');
+      const output = intro.querySelector<HTMLElement>('[data-typing-output]');
+      const visual = intro.querySelector<HTMLElement>('.typing-intro__visual');
+      if (!copy || !output || !visual) return;
+
+      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (motionPreference.matches) return;
+
+      const steps = createKeystrokes(copy.textContent ?? '');
+      let position = 0;
+      let typed = '';
+      let timer: ReturnType<typeof setTimeout>;
+
+      const finish = () => {
+        clearTimeout(timer);
+        delete intro.dataset.typingActive;
+        visual.hidden = true;
+        motionPreference.removeEventListener('change', onMotionChange);
+        document.removeEventListener('astro:before-swap', finish);
+        window.removeEventListener('pagehide', finish);
+      };
+
+      const onMotionChange = () => {
+        if (motionPreference.matches) finish();
+      };
+
+      const tick = () => {
+        if (!intro.isConnected || position >= steps.length) {
+          finish();
+          return;
+        }
+
+        const step = steps[position++];
+        let delay: number;
+        if (step.kind === 'pause') {
+          delay = step.duration;
+        } else if (step.kind === 'delete') {
+          typed = typed.slice(0, -1);
+          delay = 45;
+        } else {
+          typed += step.character;
+          delay = 25 + Math.random() * 40;
+          if (/[.!?]/.test(step.character)) delay += 260;
+          else if (step.character === ',') delay += 150;
+        }
+
+        output.textContent = typed;
+        timer = setTimeout(tick, delay);
+      };
+
+      intro.dataset.typingActive = 'true';
+      output.textContent = '';
+      visual.hidden = false;
+      motionPreference.addEventListener('change', onMotionChange);
+      document.addEventListener('astro:before-swap', finish);
+      window.addEventListener('pagehide', finish);
+      timer = setTimeout(tick, 280);
+    });
+  }
+
+  initializeTypingIntros();
+  document.addEventListener('astro:page-load', initializeTypingIntros);
+</script>
+
+<style>
+  .typing-intro {
+    position: relative;
+  }
+
+  /* The complete copy reserves space and stays available to screen readers. */
+  .typing-intro[data-typing-active] [data-typing-copy] {
+    opacity: 0;
+  }
+
+  .typing-intro__visual {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .typing-intro__cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 2px;
+    background: var(--aw-color-primary);
+    vertical-align: -0.1em;
+    animation: typing-cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes typing-cursor-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typing-intro[data-typing-active] [data-typing-copy] {
+      opacity: 1;
+    }
+
+    .typing-intro__visual {
+      display: none;
+    }
+  }
+</style>

@@ -3,9 +3,10 @@ import Layout from '~/layouts/PageLayout.astro';
 import ProjectEntry from '~/components/ProjectEntry.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import PerceptionStudy from '~/components/PerceptionStudy.astro';
+import TypingIntro from '~/components/TypingIntro.astro';
 import { SITE, I18N, METADATA } from 'astrowind:config';
 import { projects } from '~/data/projects';
-import { researchAreas, researchIntroduction } from '~/data/research';
+import { researchAreas } from '~/data/research';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
@@ -37,9 +38,9 @@ const structuredData = {
       <div>
         <p class="lab-eyebrow"><span class="lab-status-dot" aria-hidden="true"></span>Personal research lab</p>
         <h1 id="home-title" class="lab-display">Exploring how<br /><span class="text-primary">machines see.</span></h1>
-        <p class="lab-lede">
-          I'm Abteen Arab. {researchIntroduction}
-        </p>
+        <TypingIntro
+          text="Hi! I'm Abteen Arab, and welcome to my personal lab. This space serves as a personal research wiki where I document ongoing projects, ideas, experiments, and directions that I find interesting."
+        />
         <div class="lab-actions">
           <a class="lab-button" href={getPermalink('/research-highlights')}
             >Explore research highlights <span aria-hidden="true">↗</span></a
