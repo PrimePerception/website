@@ -1,0 +1,45 @@
+---
+import { teachings } from '~/data/teachings';
+
+interface Props {
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+---
+
+<ul class="grid list-none gap-5 p-0 md:grid-cols-2">
+  {
+    teachings.map((course) => (
+      <li class="lab-teaching-card">
+        <article class="flex h-full flex-col" aria-labelledby={`${course.id}-title`}>
+          <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+            <p class="lab-eyebrow">{course.code}</p>
+            <span class:list={['lab-teaching-role', { 'is-instructor': course.role === 'Instructor' }]}>
+              {course.role}
+            </span>
+          </div>
+          <Heading id={`${course.id}-title`} class="text-xl leading-snug font-medium text-heading">
+            {course.title}
+          </Heading>
+          <ul class="lab-teaching-terms" aria-label="Teaching terms">
+            {course.terms.map((term) => (
+              <li>
+                {term.label}
+                {term.upcoming && <span class="text-primary"> · Upcoming</span>}
+              </li>
+            ))}
+          </ul>
+          <p class="lab-text mb-5">{course.description}</p>
+          {course.href && (
+            <a class="lab-text-link mt-auto self-start" href={course.href} target="_blank" rel="noopener noreferrer">
+              Course description <span aria-hidden="true">↗</span>
+              <span class="sr-only"> for {course.code} (opens in a new tab)</span>
+            </a>
+          )}
+        </article>
+      </li>
+    ))
+  }
+</ul>

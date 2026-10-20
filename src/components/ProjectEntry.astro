@@ -10,9 +10,9 @@ export interface Props {
 const { project, compact = false } = Astro.props;
 ---
 
-<article class="grid items-center gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12" aria-labelledby={`${project.id}-title`}>
+<article class="grid min-w-0 items-center gap-8 lg:grid-cols-2 lg:gap-12" aria-labelledby={`${project.id}-title`}>
   <a
-    class="lab-project-visual transition-opacity hover:opacity-90"
+    class="lab-project-visual min-w-0 transition-opacity hover:opacity-90"
     href={project.href}
     target="_blank"
     rel="noopener noreferrer"
@@ -22,13 +22,13 @@ const { project, compact = false } = Astro.props;
       src={project.image}
       alt={project.imageAlt}
       widths={[480, 720, 1080, 1440]}
-      sizes="(min-width: 768px) 570px, calc(100vw - 76px)"
+      sizes="(min-width: 1152px) 482px, (min-width: 1024px) calc((100vw - 188px) / 2), (min-width: 768px) calc(100vw - 94px), calc(100vw - 78px)"
       layout="full-width"
       format="webp"
       class="h-auto w-full rounded-sm"
     />
   </a>
-  <div>
+  <div class="min-w-0">
     <p class="lab-eyebrow">{compact ? `${project.area} / ${project.year}` : `Research / ${project.year}`}</p>
     <h3 id={`${project.id}-title`} class="mt-4 text-3xl font-medium tracking-tight text-heading">{project.title}</h3>
     {
