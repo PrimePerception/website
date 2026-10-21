@@ -31,7 +31,7 @@ export const featuredProject: LabProject = {
   image: overview,
   imageAlt:
     'VGGT-Prime overview showing a Mount Rushmore 3D reconstruction alongside charts comparing reconstruction quality and inference runtime.',
-  tags: ['Computer vision', '3D geometry', 'Efficient models'],
+  tags: ['Computer vision', '3D geometry', 'Efficient models', 'View count scaling'],
   year: '2026',
   authors: 'Abteen Arab et al.',
 };
@@ -48,7 +48,7 @@ export const redtProject: LabProject = {
   image: redtOverview,
   imageAlt:
     'ReDT high-definition 3D reconstruction of a truck alongside charts comparing reconstruction quality and inference runtime.',
-  tags: ['Computer vision', '3D geometry', 'Efficient models'],
+  tags: ['Computer vision', '3D geometry', 'Efficient models', 'Resolution count scaling'],
   year: '2026',
   authors: 'Abteen Arab et al.',
 };
