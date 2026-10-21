@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 import overview from '~/assets/images/vggt-prime-overview.png';
 import acmilOverview from '~/assets/images/acmil-overview.png';
+import redtOverview from '~/assets/images/redt-overview.png';
 
 export interface LabProject {
   id: string;
@@ -35,6 +36,23 @@ export const featuredProject: LabProject = {
   authors: 'Abteen Arab et al.',
 };
 
+export const redtProject: LabProject = {
+  id: 'redt',
+  title: 'ReDT',
+  area: 'Visual Geometry Models',
+  subtitle: 'Resolution-Decoupled Visual Geometry Transformer',
+  description:
+    'Resolution-decoupled attention for high-definition 3D reconstruction. ReDT maps each view to a fixed-size set of basis tokens, computes correspondences in this compact space, and projects features back to the original resolution for dense prediction.',
+  href: 'https://redtmodel.github.io/redt_website/',
+  paperHref: 'https://arxiv.org/pdf/2610.25517',
+  image: redtOverview,
+  imageAlt:
+    'ReDT high-definition 3D reconstruction of a truck alongside charts comparing reconstruction quality and inference runtime.',
+  tags: ['Computer vision', '3D geometry', 'Efficient models'],
+  year: '2026',
+  authors: 'Abteen Arab et al.',
+};
+
 export const acmilProject: LabProject = {
   id: 'acmil',
   title: 'AC-MIL',
@@ -52,4 +70,4 @@ export const acmilProject: LabProject = {
   authors: 'Abteen Arab et al.',
 };
 
-export const projects: LabProject[] = [featuredProject, acmilProject];
+export const projects: LabProject[] = [redtProject, featuredProject, acmilProject];
