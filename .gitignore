@@ -26,3 +26,11 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 
 .astro
+
+# Local Worker state and secrets (never commit live credentials or D1 data).
+**/.wrangler/
+.dev.vars
+.dev.vars.*
+.env.*
+!.env.example
+coverage/

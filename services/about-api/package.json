@@ -1,0 +1,28 @@
+{
+  "name": "prime-about-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.3"
+  },
+  "scripts": {
+    "dev": "wrangler dev --config wrangler.local.jsonc --ip 127.0.0.1 --port 8787",
+    "local:setup": "wrangler d1 migrations apply ABOUT_DB --local --config wrangler.local.jsonc && node scripts/seed-local.mjs",
+    "check": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "build": "wrangler deploy --dry-run --outdir .worker-build",
+    "deploy": "node scripts/check-deploy.mjs && wrangler deploy",
+    "migrate": "wrangler d1 migrations apply ABOUT_DB --remote"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261027.1",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.0.0"
+  },
+  "dependencies": {
+    "parse5": "^8.0.1"
+  }
+}

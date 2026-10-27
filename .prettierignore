@@ -2,3 +2,6 @@ dist
 node_modules
 .github
 .changeset
+**/.wrangler/
+**/.worker-build/
+coverage/

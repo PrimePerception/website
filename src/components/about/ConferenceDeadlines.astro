@@ -1,0 +1,97 @@
+---
+import { CONFERENCE_SEEDS } from '~/data/conferences';
+import {
+  ESTIMATE_LABEL,
+  conferenceCountdown,
+  formatEstimatedWindow,
+  formatPublishedDeadline,
+  registrationIsClosed,
+  primaryConferenceDeadline,
+  relativeConferenceLabel,
+  sortConferences,
+} from '~/lib/about/conferences';
+import '~/assets/styles/about-conferences.css';
+
+const now = Date.now();
+const conferences = sortConferences(CONFERENCE_SEEDS, now);
+---
+
+<section class="lab-rule lab-section conference-section" aria-labelledby="conference-title">
+  <div class="conference-heading">
+    <div>
+      <p class="lab-eyebrow">Research calendar</p>
+      <h2 id="conference-title" class="lab-section-heading">Conference deadlines</h2>
+    </div>
+  </div>
+  <aw-conference-deadlines data-records={JSON.stringify(CONFERENCE_SEEDS)}>
+    <ul class="conference-list" data-conference-list>
+      {
+        conferences.map((conference) => {
+          const primary = primaryConferenceDeadline(conference);
+          return (
+            <li class="conference-row">
+              <div class="conference-identity">
+                <h3>
+                  {conference.name} <span>{conference.year}</span>
+                </h3>
+                <p class="conference-relative">{relativeConferenceLabel(conference, now)}</p>
+              </div>
+              <div class="conference-detail">
+                {primary && <p class="conference-date-label">{primary.label}</p>}
+                <p class="conference-date">
+                  {primary ? (
+                    <time datetime={primary.deadline.at}>{formatPublishedDeadline(primary.deadline)}</time>
+                  ) : conference.estimatedWindow ? (
+                    formatEstimatedWindow(conference.estimatedWindow)
+                  ) : (
+                    'Awaiting announcement'
+                  )}
+                </p>
+                {primary ? (
+                  <p class="conference-timing">
+                    <span class="conference-badge">Confirmed</span>{' '}
+                    {registrationIsClosed(conference, now) ? (
+                      <strong class="conference-closed">Registration closed</strong>
+                    ) : (
+                      conferenceCountdown(conference, now)
+                    )}
+                  </p>
+                ) : (
+                  <p class="conference-estimate">{ESTIMATE_LABEL}</p>
+                )}
+              </div>
+              <div class="conference-sources">
+                <a
+                  href={conference.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${conference.name} ${conference.year} official ${conference.kind === 'confirmed' ? 'call for papers' : 'conference page'} (opens in new tab)`}
+                >
+                  {conference.kind === 'confirmed' ? 'Official CFP' : 'Conference page'}{' '}
+                  <span aria-hidden="true">↗</span>
+                </a>
+                {conference.estimateSourceUrl && (
+                  <a
+                    href={conference.estimateSourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${conference.name} previous official submission dates (opens in new tab)`}
+                  >
+                    Previous dates <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </aw-conference-deadlines>
+</section>
+
+<script>
+  import { ConferenceDeadlinesElement } from '~/lib/about/conference-client';
+  if (!customElements.get('aw-conference-deadlines')) {
+    customElements.define('aw-conference-deadlines', ConferenceDeadlinesElement);
+  }
+</script>

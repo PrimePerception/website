@@ -35,7 +35,7 @@ jobs:
 
   build:
     name: Build
-    needs: check
+    needs: [check, about-api]
     runs-on: ubuntu-latest
 
     steps:
@@ -53,3 +53,24 @@ jobs:
 
       - name: Build application
         run: npm run build
+
+  about-api:
+    name: About API and privacy checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: services/about-api/package-lock.json
+      - name: Install API dependencies
+        run: npm ci --prefix services/about-api
+      - name: Check API types
+        run: npm run api:check
+      - name: Test API, privacy, and conference rules
+        run: npm run api:test
+      - name: Test About page data and chart behavior
+        run: npm run test:about-ui

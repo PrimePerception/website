@@ -1,0 +1,7 @@
+node_modules/
+.wrangler/
+.worker-build/
+.dev.vars*
+.env*
+!.env.example
+local-fixtures.sql

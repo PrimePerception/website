@@ -1,0 +1,138 @@
+.conference-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.conference-heading .lab-section-heading {
+  margin-top: 10px;
+}
+aw-conference-deadlines {
+  display: block;
+}
+.conference-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.conference-row {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) 132px;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--lab-line);
+}
+.conference-identity h3 {
+  color: var(--aw-color-text-heading);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+}
+.conference-identity h3 span {
+  color: var(--aw-color-text-muted);
+  font-weight: 400;
+}
+.conference-relative {
+  color: var(--aw-color-primary);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 5px;
+}
+.conference-date {
+  color: var(--aw-color-text-heading);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.conference-date-label {
+  color: var(--aw-color-text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 3px;
+}
+.conference-timing,
+.conference-estimate {
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 6px;
+}
+.conference-estimate {
+  color: var(--aw-color-text-muted);
+}
+.conference-closed {
+  color: var(--aw-color-text-default);
+  font-weight: 500;
+}
+.conference-badge {
+  display: inline-block;
+  color: var(--aw-color-primary);
+  background: var(--lab-accent-soft);
+  border: 1px solid var(--lab-button-border);
+  border-radius: 4px;
+  padding: 0 7px;
+  margin-right: 7px;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+.conference-sources {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  padding-top: 2px;
+}
+.conference-sources a {
+  color: var(--aw-color-primary);
+  font-size: 12px;
+  line-height: 1.7;
+  text-underline-offset: 4px;
+}
+.conference-sources a:hover {
+  text-decoration: underline;
+}
+.conference-sources a:focus-visible {
+  outline: 2px solid var(--aw-color-primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .conference-heading {
+    display: block;
+  }
+  .conference-row {
+    grid-template-columns: 128px minmax(0, 1fr);
+    gap: 12px 18px;
+  }
+  .conference-sources {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 6px 18px;
+    padding-top: 0;
+  }
+}
+@media (max-width: 480px) {
+  .conference-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 22px 0;
+  }
+  .conference-identity {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .conference-relative {
+    margin-top: 0;
+  }
+  .conference-sources {
+    grid-column: 1;
+  }
+}

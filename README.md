@@ -53,6 +53,22 @@
 
 <br>
 
+## Prime Perception About page
+
+The About page includes private-source GPU monitoring, shared anonymous reactions,
+and official-source conference deadlines. The static site remains on GitHub Pages;
+the separate [About API](services/about-api/README.md) runs on a Cloudflare Worker
+with D1 storage. See its README for local fixtures, tests, deployment, secret setup,
+conference review, and the Runpod GraphQL migration requirement.
+
+Set the public Worker URL in the GitHub repository variable
+`PUBLIC_ABOUT_API_BASE` to connect the deployed page. The Runpod API key and signing
+secrets belong only in the Worker secret store. Without an API URL the page shows
+an unavailable state and its reviewed conference-date fallback.
+
+Run `npm run api:check`, `npm run api:test`, and `npm run test:about-ui` alongside the
+site's `npm run build` and `npm run check` before publishing changes.
+
 ## Demo
 
 📌 [https://astrowind.vercel.app/](https://astrowind.vercel.app/)

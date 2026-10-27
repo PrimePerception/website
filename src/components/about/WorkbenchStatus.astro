@@ -1,0 +1,75 @@
+---
+import '~/assets/styles/about-activity.css';
+---
+
+<about-workbench class="about-activity-card" aria-labelledby="workbench-title">
+  <header class="about-card-heading">
+    <div>
+      <p class="lab-eyebrow">A glimpse into the lab</p>
+      <h2 id="workbench-title" class="about-card-title">Workbench Status</h2>
+    </div>
+    <span class="about-status-badge" data-workbench-badge data-state="unavailable" role="status">
+      <span aria-hidden="true"></span><span data-workbench-state>Unavailable</span>
+    </span>
+  </header>
+  <div class="about-utilization">
+    <p class="about-utilization-number" data-workbench-value aria-label="GPU utilization unavailable">—</p>
+    <p class="about-small-copy">Aggregate GPU utilization</p>
+  </div>
+  <div
+    class="about-utilization-meter"
+    role="img"
+    aria-label="Aggregate GPU utilization unavailable"
+    data-workbench-meter
+  >
+    <span></span>
+  </div>
+
+  <div class="about-history-heading">
+    <h3>Recent activity</h3>
+    <div class="about-range-controls" role="group" aria-label="Activity history range">
+      <button type="button" data-history-range="24h" aria-pressed="true" disabled>24h</button>
+      <button type="button" data-history-range="7d" aria-pressed="false" disabled>7d</button>
+      <button type="button" data-history-range="30d" aria-pressed="false" disabled>30d</button>
+    </div>
+  </div>
+  <figure class="about-history-figure">
+    <svg
+      class="about-history-chart"
+      viewBox="0 0 520 164"
+      role="img"
+      aria-labelledby="workbench-chart-title workbench-chart-description"
+    >
+      <title id="workbench-chart-title">GPU utilization over the last 24 hours</title>
+      <desc id="workbench-chart-description">No recorded activity is available. Missing readings appear as gaps.</desc>
+      <g class="about-chart-grid" aria-hidden="true">
+        <path d="M38 12H510 M38 72H510 M38 132H510"></path>
+        <text x="0" y="16">100%</text>
+        <text x="9" y="76">50%</text>
+        <text x="16" y="136">0%</text>
+      </g>
+      <g data-history-lines></g>
+      <g class="about-chart-axis" aria-hidden="true">
+        <text x="38" y="157" data-history-start>24 hours ago</text>
+        <text x="510" y="157" text-anchor="end" data-history-end>Now</text>
+      </g>
+    </svg>
+    <p class="about-chart-empty" data-history-empty>No recorded activity yet.</p>
+  </figure>
+  <details class="about-history-data">
+    <summary>View chart data</summary>
+    <div class="about-table-scroll" tabindex="0" aria-label="Recorded GPU utilization">
+      <table>
+        <caption class="sr-only">Aggregate GPU utilization chart values</caption>
+        <thead><tr><th scope="col">Time</th><th scope="col">Utilization</th></tr></thead>
+        <tbody data-history-table><tr><td colspan="2">No recorded activity yet.</td></tr></tbody>
+      </table>
+    </div>
+  </details>
+  <p class="about-tracking-date" data-tracking-start>Tracking has not started.</p>
+</about-workbench>
+
+<script>
+  import { registerWorkbench } from '~/lib/about/activity-client';
+  registerWorkbench();
+</script>

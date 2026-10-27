@@ -1,0 +1,62 @@
+---
+import { REACTION_KINDS } from '~/lib/about/contracts';
+
+const labels = {
+  gg: 'GG',
+  'touch-grass': 'Touch Grass',
+  shower: 'Shower',
+  league: 'Play League',
+};
+const icons = {
+  gg: 'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z',
+  'touch-grass': 'M12 21v-9m0 5-5-5m5 2 5-5M3 21h18M8 5l4-3 4 3M5 9l3-4m8 0 3 4',
+  shower: 'M5 9a7 7 0 0 1 12-5l2 2M14 9l6-6M5 14v1m5-1v1m5-1v1m-8 4v1m5-1v1m5-1v1',
+  league:
+    'M8 8h8a5 5 0 0 1 4.8 3.6l1.1 4A3 3 0 0 1 17 18l-2-2H9l-2 2a3 3 0 0 1-4.9-2.4l1.1-4A5 5 0 0 1 8 8ZM7 10v4m-2-2h4m7-1h.01m2 2h.01',
+};
+---
+
+<about-encouragement class="about-activity-card about-encouragement-card" aria-labelledby="encouragement-title">
+  <header class="about-card-heading">
+    <div>
+      <p class="lab-eyebrow">A little encouragement</p>
+      <h2 id="encouragement-title" class="about-card-title">Cheer from the sidelines</h2>
+    </div>
+  </header>
+  <p class="about-small-copy about-reaction-intro">
+    Leave a quick reaction to cheer me on or suggest a break. Each counter totals reactions from everyone who visits.
+  </p>
+  <div class="about-reaction-list">
+    {
+      REACTION_KINDS.map((kind) => (
+        <button
+          type="button"
+          class:list={['about-reaction-button', { 'about-reaction-primary': kind === 'gg' }]}
+          data-reaction={kind}
+          aria-label={`${kind === 'touch-grass' ? 'Touch Grass (Go For A Hike)' : labels[kind]}: count unavailable`}
+          disabled
+        >
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
+            <path d={icons[kind]} />
+          </svg>
+          <span class="about-reaction-label">
+            <span>{labels[kind]}</span>
+            {kind === 'touch-grass' && <span class="about-reaction-subtitle">(Go For A Hike)</span>}
+          </span>
+          <span class="about-reaction-count" data-reaction-count={kind}>
+            —
+          </span>
+          <span class="about-reaction-wait" data-reaction-wait={kind} />
+        </button>
+      ))
+    }
+  </div>
+  <p class="about-reaction-feedback" data-reaction-feedback role="status" aria-live="polite" aria-atomic="true">
+    Reactions will be available when the activity service is connected.
+  </p>
+</about-encouragement>
+
+<script>
+  import { registerEncouragement } from '~/lib/about/activity-client';
+  registerEncouragement();
+</script>

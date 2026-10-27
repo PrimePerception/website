@@ -1,5 +1,8 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import WorkbenchStatus from '~/components/about/WorkbenchStatus.astro';
+import Encouragement from '~/components/about/Encouragement.astro';
+import ConferenceDeadlines from '~/components/about/ConferenceDeadlines.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
@@ -39,6 +42,13 @@ const metadata = {
         </p>
       </div>
     </section>
+
+    <div id="workbench" class="lab-rule lab-section about-activity-grid scroll-mt-24">
+      <WorkbenchStatus />
+      <Encouragement />
+    </div>
+
+    <ConferenceDeadlines />
 
     <section class="lab-rule lab-section" aria-label="Explore the work">
       <a class="lab-text-link" href={getPermalink('/research-highlights')}
