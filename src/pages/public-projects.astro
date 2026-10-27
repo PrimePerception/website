@@ -1,0 +1,23 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import PublicProjects from '~/components/PublicProjects.astro';
+
+const metadata = {
+  title: 'Public Projects',
+  description:
+    'Public projects built and shared by Abteen Arab, including Runpod Desktop, a macOS widget for monitoring Runpod GPUs.',
+};
+---
+
+<Layout metadata={metadata}>
+  <div class="lab-shell">
+    <section class="lab-page-intro" aria-labelledby="public-projects-title">
+      <p class="lab-eyebrow mb-3">Built to share</p>
+      <h1 id="public-projects-title" class="lab-title">Public Projects</h1>
+      <p class="lab-text mt-7">Projects I build for my own workflow and share with the community.</p>
+    </section>
+    <div class="pb-12 md:pb-16">
+      <PublicProjects headingLevel="h2" />
+    </div>
+  </div>
+</Layout>

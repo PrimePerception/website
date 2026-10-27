@@ -3,8 +3,8 @@ import { getPermalink } from './utils/permalinks';
 const siteLinks = [
   { text: 'Home', href: getPermalink('/') },
   { text: 'Research Highlights', href: getPermalink('/research-highlights') },
-  { text: 'Public Tools', href: getPermalink('/public-tools') },
-  { text: 'Service', href: getPermalink('/teachings') },
+  { text: 'Public Projects', href: getPermalink('/public-projects') },
+  { text: 'Teaching & Service', href: getPermalink('/teachings') },
   { text: 'About', href: getPermalink('/about') },
 ];
 

@@ -26,6 +26,10 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   output: 'static',
 
+  redirects: {
+    '/public-tools': '/public-projects',
+  },
+
   // Prefetch links as they enter the viewport for snappier navigations
   // (works together with <ClientRouter />, which enables prefetch by default).
   prefetch: {
