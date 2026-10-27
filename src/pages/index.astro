@@ -5,6 +5,7 @@ import StructuredData from '~/components/common/StructuredData.astro';
 import PerceptionStudy from '~/components/PerceptionStudy.astro';
 import TeachingCards from '~/components/TeachingCards.astro';
 import TypingIntro from '~/components/TypingIntro.astro';
+import PublicTools from '~/components/PublicTools.astro';
 import { SITE, I18N, METADATA } from 'astrowind:config';
 import { projects } from '~/data/projects';
 import { researchAreas } from '~/data/research';
@@ -121,6 +122,20 @@ const structuredData = {
         Teaching and course support in biomedical engineering at the University of British Columbia.
       </p>
       <TeachingCards />
+    </section>
+
+    <section id="public-tools" class="lab-rule lab-section scroll-mt-24" aria-labelledby="public-tools-title">
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <div>
+          <p class="lab-eyebrow mb-3">04 / Built to share</p>
+          <h2 id="public-tools-title" class="lab-section-heading">Public Tools</h2>
+        </div>
+        <a class="lab-text-link" href={getPermalink('/public-tools')}
+          >All public tools <span aria-hidden="true">→</span></a
+        >
+      </div>
+      <p class="lab-text mt-4 mb-10">Small tools I build for my own workflow and share with the community.</p>
+      <PublicTools />
     </section>
   </div>
 </Layout>

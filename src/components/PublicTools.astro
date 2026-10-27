@@ -1,0 +1,53 @@
+---
+import Image from '~/components/common/Image.astro';
+import runpodWidgetPreview from '~/assets/images/runpod-widget-preview.png';
+
+interface Props {
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+const githubUrl = 'https://github.com/Abteen-Arab/RunPod_GPU_Widget_App_Mac';
+---
+
+<article class="grid min-w-0 items-center gap-8 lg:grid-cols-2 lg:gap-12" aria-labelledby="runpod-tool-title">
+  <a
+    class="block min-w-0 overflow-hidden rounded-xl border border-[var(--lab-line)] transition-opacity hover:opacity-90"
+    href={githubUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="View Runpod Desktop on GitHub (opens in a new tab)"
+  >
+    <Image
+      src={runpodWidgetPreview}
+      alt="Small, medium, and large Runpod desktop widgets showing sample GPU usage, pod status, and estimated credit time."
+      widths={[480, 720, 1080, 1440]}
+      sizes="(min-width: 1152px) 528px, (min-width: 1024px) calc((100vw - 96px) / 2), calc(100vw - 48px)"
+      layout="full-width"
+      format="webp"
+      class="h-auto w-full"
+    />
+  </a>
+  <div class="min-w-0">
+    <p class="lab-eyebrow">macOS / GPU monitoring</p>
+    <Heading id="runpod-tool-title" class="mt-4 text-3xl font-medium tracking-tight text-heading"
+      >Runpod Desktop</Heading
+    >
+    <p class="lab-text mt-5">
+      Keep an eye on your Runpod GPUs from your desktop. See pod status, GPU and memory usage, account balance, and
+      estimated credit time remaining in a native macOS app and widget.
+    </p>
+    <ul class="lab-project-tags" aria-label="Requirements and features">
+      <li>macOS 14+</li>
+      <li>Apple silicon</li>
+      <li>Read-only monitoring</li>
+    </ul>
+    <div class="lab-actions">
+      <a class="lab-button" href={githubUrl} target="_blank" rel="noopener noreferrer">
+        View on GitHub <span aria-hidden="true">↗</span>
+        <span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    </div>
+  </div>
+</article>
