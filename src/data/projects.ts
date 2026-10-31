@@ -2,6 +2,7 @@ import type { ImageMetadata } from 'astro';
 import overview from '~/assets/images/vggt-prime-overview.png';
 import acmilOverview from '~/assets/images/acmil-overview.png';
 import redtOverview from '~/assets/images/redt-overview.png';
+import openhistoOverview from '~/assets/images/openhisto-overview.png';
 
 export interface LabProject {
   id: string;
@@ -70,4 +71,21 @@ export const acmilProject: LabProject = {
   authors: 'Abteen Arab et al.',
 };
 
-export const projects: LabProject[] = [redtProject, featuredProject, acmilProject];
+export const openhistoProject: LabProject = {
+  id: 'openhisto',
+  title: 'OpenHisto',
+  area: 'Computational Medicine',
+  subtitle: 'An end-to-end Python package for computational pathology',
+  description:
+    'An end-to-end Python package connecting whole-slide image acquisition, patch extraction, stain normalization and feature extraction with classification, risk and survival modelling, segmentation, vision-language analysis and visualization.',
+  href: 'https://openhist.github.io/OpenHisto_Web/',
+  codeHref: 'https://github.com/OpenHist/OpenHistology_Package',
+  image: openhistoOverview,
+  imageAlt:
+    'OpenHisto pipeline: slides and metadata to patches, optional stain normalization, then parallel feature extraction and MIL prediction, segmentation, or vision-language descriptions, followed by visual outputs and exports.',
+  tags: ['Computational pathology', 'Research software', 'Multimodal analysis'],
+  year: '2026',
+  authors: 'Abteen Arab',
+};
+
+export const projects: LabProject[] = [redtProject, featuredProject, acmilProject, openhistoProject];

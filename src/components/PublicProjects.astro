@@ -1,5 +1,7 @@
 ---
 import Image from '~/components/common/Image.astro';
+// Official app/widget preview using sample data, copied unchanged:
+// https://github.com/Abteen-Arab/RunPod_GPU_Widget_App_Mac/blob/865ab55dd633f10d4d4df3671d80f68cf0ac9715/RunpodWidgetPreview.png
 import runpodWidgetPreview from '~/assets/images/runpod-widget-preview.png';
 
 interface Props {
@@ -21,7 +23,7 @@ const githubUrl = 'https://github.com/Abteen-Arab/RunPod_GPU_Widget_App_Mac';
   >
     <Image
       src={runpodWidgetPreview}
-      alt="Small, medium, and large Runpod desktop widgets showing sample GPU usage, pod status, and estimated credit time."
+      alt="Runpod Desktop dashboard beside small, medium, and large desktop widgets showing sample credit estimates, pod status, and GPU and VRAM usage."
       widths={[480, 720, 1080, 1440]}
       sizes="(min-width: 1152px) 528px, (min-width: 1024px) calc((100vw - 96px) / 2), calc(100vw - 48px)"
       layout="full-width"

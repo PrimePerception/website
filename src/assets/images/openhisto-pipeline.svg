@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1074" viewBox="0 0 1440 1074" fill="none" role="img" aria-labelledby="title description">
+  <title id="title">OpenHisto computational pathology pipeline</title>
+  <desc id="description">Slides and metadata are acquired, patches are extracted, and raw or stain-normalized patches feed three analysis routes: features and prepared MIL inputs for classification and survival, segmentation with backend-specific conditioning, and vision-language descriptions. Outputs can be visualized and exported. Abteen Arab, 2026.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="m1 1 7 4-7 4" fill="none" stroke="#78808b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <pattern id="tissue" width="42" height="36" patternUnits="userSpaceOnUse">
+      <rect width="42" height="36" fill="#f3dce2"/>
+      <ellipse cx="12" cy="12" rx="9" ry="6" transform="rotate(-32 12 12)" fill="#dfb0c1"/>
+      <ellipse cx="12" cy="12" rx="5" ry="3.5" transform="rotate(-32 12 12)" fill="#95657f"/>
+      <ellipse cx="34" cy="29" rx="8" ry="6" transform="rotate(38 34 29)" fill="#e4b9c8"/>
+      <ellipse cx="34" cy="29" rx="4" ry="3" transform="rotate(38 34 29)" fill="#a07088"/>
+    </pattern>
+    <pattern id="matrix" width="25" height="25" patternUnits="userSpaceOnUse">
+      <rect width="25" height="25" fill="#edf0f3"/>
+      <rect x="2" y="2" width="21" height="21" rx="2" fill="#b77f91"/>
+      <rect x="2" y="2" width="10" height="21" rx="2" fill="#d6afbc"/>
+    </pattern>
+  </defs>
+  <rect width="1440" height="1074" rx="12" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="64" y="86" fill="#25272c" font-size="58" font-weight="700" letter-spacing="-1.4">OpenHisto</text>
+    <text x="64" y="132" fill="#66707b" font-size="30">One package for computational pathology</text>
+    <path d="M64 158h1312" stroke="#dfe2e7" stroke-width="2"/>
+
+    <g fill="#f8f9fb" stroke="#d9dee5" stroke-width="2">
+      <rect x="64" y="196" width="400" height="190" rx="14"/>
+      <rect x="520" y="196" width="400" height="190" rx="14"/>
+      <rect x="976" y="196" width="400" height="190" rx="14"/>
+    </g>
+    <g fill="#25272c" font-size="36" font-weight="700">
+      <text x="88" y="244">Slides &amp; metadata</text>
+      <text x="544" y="244">Patch extraction</text>
+      <text x="1000" y="244">Patch preparation</text>
+    </g>
+
+    <rect x="90" y="271" width="121" height="86" rx="6" fill="#fff" stroke="#aeb6c0" stroke-width="2"/>
+    <rect x="101" y="282" width="99" height="51" rx="4" fill="url(#tissue)"/>
+    <path d="M111 345h36m8 0h20" stroke="#b2bac4" stroke-width="3" stroke-linecap="round"/>
+    <g stroke="#aeb6c0" stroke-width="3" stroke-linecap="round">
+      <path d="M238 284h166M238 305h129M238 326h153"/>
+    </g>
+    <text x="238" y="356" fill="#66707b" font-size="24">WSI + source IDs</text>
+
+    <rect x="545" y="272" width="112" height="86" rx="4" fill="url(#tissue)"/>
+    <path d="M582 272v86m38-86v86m-75-57h112m-112 29h112" stroke="#fff" stroke-width="4"/>
+    <text x="682" y="302" fill="#66707b" font-size="27">Patches +</text>
+    <text x="682" y="338" fill="#66707b" font-size="27">coordinates</text>
+
+    <rect x="1002" y="276" width="72" height="72" rx="5" fill="url(#tissue)"/>
+    <rect x="1086" y="276" width="72" height="72" rx="5" fill="url(#tissue)"/>
+    <rect x="1086" y="276" width="72" height="72" rx="5" fill="#bf6d77" opacity=".16"/>
+    <text x="1178" y="302" fill="#66707b" font-size="25">Raw or</text>
+    <text x="1178" y="338" fill="#66707b" font-size="25">normalized</text>
+
+    <g stroke="#78808b" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M470 291h40"/>
+      <path d="M926 291h40"/>
+    </g>
+    <path d="M1176 386v37H264" stroke="#78808b" stroke-width="3"/>
+    <g stroke="#78808b" stroke-width="3" marker-end="url(#arrow)">
+      <path d="M264 423v41"/>
+      <path d="M720 423v41"/>
+      <path d="M1176 423v41"/>
+    </g>
+
+    <g fill="#fff" stroke="#d9dee5" stroke-width="2">
+      <rect x="64" y="476" width="400" height="398" rx="14"/>
+      <rect x="520" y="476" width="400" height="398" rx="14"/>
+      <rect x="976" y="476" width="400" height="398" rx="14"/>
+    </g>
+    <g fill="#a45c70">
+      <rect x="64" y="476" width="400" height="6" rx="3"/>
+      <rect x="520" y="476" width="400" height="6" rx="3"/>
+      <rect x="976" y="476" width="400" height="6" rx="3"/>
+    </g>
+    <g fill="#25272c" font-size="36" font-weight="700">
+      <text x="88" y="535">Feature extraction</text>
+      <text x="544" y="535">Segmentation</text>
+      <text x="1000" y="535">Vision–language</text>
+    </g>
+
+    <rect x="152" y="562" width="225" height="77" rx="5" fill="url(#matrix)"/>
+    <path d="M264 650v31" stroke="#78808b" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="264" y="721" fill="#25272c" font-size="31" font-weight="700" text-anchor="middle">MIL + prediction heads</text>
+    <text x="264" y="757" fill="#66707b" font-size="23" text-anchor="middle">Prepared bags / graphs / hierarchies</text>
+    <rect x="88" y="781" width="352" height="68" rx="8" fill="#f7ecef"/>
+    <text x="264" y="810" fill="#87495b" font-size="28" text-anchor="middle">Classification</text>
+    <text x="264" y="839" fill="#87495b" font-size="28" text-anchor="middle">Risk &amp; survival</text>
+
+    <rect x="646" y="566" width="148" height="124" rx="7" fill="#f2f4f6" stroke="#dce1e7" stroke-width="2"/>
+    <g stroke-width="2.5">
+      <path d="m663 589 17-8 14 9 1 20-15 10-18-11Z" fill="#c6dae0" stroke="#7e9da7"/>
+      <path d="m718 577 19 3 9 17-10 18-23 1-10-16Z" fill="#e2c1cd" stroke="#b67d93"/>
+      <path d="m758 618 18-8 12 15-2 19-18 6-13-15Z" fill="#d9d0e4" stroke="#9e8aaf"/>
+      <path d="m679 649 14-14 22 6 5 22-17 13-21-9Z" fill="#e8d3b2" stroke="#bba27e"/>
+      <path d="m738 646 12 3 5 12-7 13-14-3-4-13Z" fill="#c6dae0" stroke="#7e9da7"/>
+    </g>
+    <text x="720" y="735" fill="#66707b" font-size="26" text-anchor="middle">Prompts / embeddings</text>
+    <text x="720" y="768" fill="#66707b" font-size="26" text-anchor="middle">by backend</text>
+    <rect x="544" y="794" width="352" height="55" rx="8" fill="#f7ecef"/>
+    <text x="720" y="830" fill="#87495b" font-size="28" text-anchor="middle">Masks &amp; polygons</text>
+
+    <path d="M1099 566h154a14 14 0 0 1 14 14v81a14 14 0 0 1-14 14h-91l-30 24v-24h-33a14 14 0 0 1-14-14v-81a14 14 0 0 1 14-14Z" fill="#f7ecef" stroke="#c9a5b0" stroke-width="2.5"/>
+    <path d="M1111 594h128m-128 24h102m-102 24h115" stroke="#b47d8f" stroke-width="5" stroke-linecap="round"/>
+    <text x="1176" y="750" fill="#66707b" font-size="27" text-anchor="middle">Images + prompts</text>
+    <rect x="1000" y="794" width="352" height="55" rx="8" fill="#f7ecef"/>
+    <text x="1176" y="830" fill="#87495b" font-size="28" text-anchor="middle">Patch descriptions</text>
+
+    <path d="M264 874v34h912v-34M720 874v34" stroke="#78808b" stroke-width="3"/>
+    <path d="M720 908v29" stroke="#78808b" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="64" y="950" width="1312" height="92" rx="12" fill="#f8f9fb" stroke="#d9dee5" stroke-width="2"/>
+    <text x="96" y="1007" fill="#25272c" font-size="34" font-weight="700">Visual outputs &amp; exports</text>
+    <text x="1344" y="1006" fill="#66707b" font-size="28" text-anchor="end">Overlays · Tables · GeoJSON</text>
+  </g>
+</svg>
