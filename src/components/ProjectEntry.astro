@@ -52,7 +52,7 @@ const { project, compact = false } = Astro.props;
       {
         project.paperHref && (
           <a class="lab-text-link" href={project.paperHref} target="_blank" rel="noopener noreferrer">
-            Read the paper{' '}
+            {project.paperLabel ?? 'Read the paper'}{' '}
             <>
               <span aria-hidden="true">↗</span>
               <span class="sr-only"> (opens in a new tab)</span>

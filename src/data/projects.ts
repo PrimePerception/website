@@ -12,6 +12,7 @@ export interface LabProject {
   description: string;
   href: string;
   paperHref?: string;
+  paperLabel?: string;
   codeHref?: string;
   image: ImageMetadata;
   imageAlt: string;
@@ -79,6 +80,8 @@ export const openhistoProject: LabProject = {
   description:
     'An end-to-end Python package connecting whole-slide image acquisition, patch extraction, stain normalization and feature extraction with classification, risk and survival modelling, segmentation, vision-language analysis and visualization.',
   href: 'https://openhist.github.io/OpenHisto_Web/',
+  paperHref: 'https://doi.org/10.5281/zenodo.24049672',
+  paperLabel: 'Paper',
   codeHref: 'https://github.com/OpenHist/OpenHistology_Package',
   image: openhistoOverview,
   imageAlt:
