@@ -1,0 +1,70 @@
+---
+const fallbackPoints = Array.from({ length: 216 }, (_, index) => {
+  const angle = (Math.floor(index / 6) / 36) * Math.PI * 2;
+  const ring = index % 6;
+  const tilt = (ring / 6 - 0.5) * 2.6;
+  const radius = 142 + ring * 4;
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius * Math.cos(tilt);
+  const z = Math.sin(angle) * radius * Math.sin(tilt);
+  const projectedY = y * Math.cos(-0.38) - z * Math.sin(-0.38);
+
+  return {
+    x: 320 + x * Math.cos(-0.42) - projectedY * Math.sin(-0.42),
+    y: 200 + x * Math.sin(-0.42) + projectedY * Math.cos(-0.42),
+    opacity: 0.22 + ((index * 17) % 29) / 50,
+  };
+});
+---
+
+<aw-openassay-preview aria-hidden="true">
+  <svg class="openassay-fallback" viewBox="0 0 640 400" fill="none" focusable="false" aria-hidden="true">
+    <g fill="#ff7a36">
+      {fallbackPoints.map((point) => <circle cx={point.x} cy={point.y} r="0.85" opacity={point.opacity} />)}
+    </g>
+    <g transform="translate(320 200) scale(.64) translate(-50 -50)">
+      <path d="M18 50H59L81 12M59 50L81 88" stroke="#ff7a36" stroke-width="8" stroke-linecap="round"></path>
+    </g>
+  </svg>
+  <canvas aria-hidden="true"></canvas>
+</aw-openassay-preview>
+
+<style>
+  aw-openassay-preview {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    contain: layout paint;
+    background: #080808;
+  }
+
+  canvas,
+  .openassay-fallback {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  canvas {
+    opacity: 0;
+  }
+
+  aw-openassay-preview[data-ready] canvas {
+    opacity: 1;
+  }
+
+  aw-openassay-preview[data-ready] .openassay-fallback {
+    visibility: hidden;
+  }
+</style>
+
+<script>
+  import { defineOpenAssayPreview } from '~/lib/openassay/preview';
+
+  defineOpenAssayPreview();
+</script>
